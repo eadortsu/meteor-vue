@@ -1,3 +1,3 @@
-# meteor-vue
-![Metero Vue](https://github.com/eadortsu/meteor-vue/blob/master/meteorvue.png)
-Metero Vue
+# Metero Vue
+![Metero Vue](https://github.com/eadortsu/meteor-vue/raw/master/meteorvue.png)
+
