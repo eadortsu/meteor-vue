@@ -1,7 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d150c25d-4e71-47b9-90b7-233894375118" name="Default Changelist" comment="" />
+    <list default="true" id="d150c25d-4e71-47b9-90b7-233894375118" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.cache/00f1d6630a5617607bbd4a357d9ee8785b443e38.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/06b4d330e7bbe2e4adcb21b72666b46eb0d22759.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/0704a7bacc5069889c83ad15af205f9bf9ae881c.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/0e013e1f08538ddd53db9ddf8b7a84f0fe958acd.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/144b321ae70839d975283b2e3fbec5f197fb7a14.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/19edabb732e3481b619e3ffd2234959f7141fe44.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/1f35e9af403a1598ab4eddf6e1a7531c2682786c.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/251af458069a11985635f06c3975799092b0f3ab.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/43a42523b2e52ee645962b773428ae59ebffe925.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/45b773a8506e8761ad5826edf42684835ce9ef21.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/5504e86906548317cf17c8b6c158ac38545992dc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/563e15015c3431f590d8e33b204ecc1fc301f7bd.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/5ae7e5533acebaf4472479cb40ee216a71c672f9.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/61f588e3a09a767b6e2acc9304717d027d731f93.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/658ebea1aa49d5f0cb67366ef917e012bea22db2.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/6a9edc49b43660c781316da737a3a861b9376f0e.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/74c5aac6261d18308f7d9bac5228b8a30a83fb2c.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/8885e1166a7052b45894c1edefd7388e27f3b974.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/91aea438505a8303d5ca77e17d569331232a313b.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/95ebd73d2cc0791b972621a21c43f76b52835f94.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/9ed19de493e39e9e3f5aafd187562f46db2e9339.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/a096512a1972fa502278b2f5d69710bd532e46fd.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/b4a1b0aec8cdb5daec7a77b6dbc4865a4238a9b7.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/ba093c78efff5644e3206b8b9deb97741aaa41b9.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/c23ef819698938443e7825537fa0f5aa52e4e418.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/c836039ce4153adb62c17930c331fe9ea1f161bf.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/cc44bab6b8384773cdc78322c09eba1998e1250a.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/d490a44007ddb97c7194d8a79a720e4b182cf527.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/e47396cefa834451155953bb838c5e2d01dbddf3.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/fd1de662e681c5675bfd04743583d1f148bf3bd8.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/fd7d4dd31d90eea7cda5f59d9e82ea3fc98c9a93.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/fd9bcc8ddd6f80c2a0a0ac03055321d2c72dba3a.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cache/ffb3ff1c1d1b83fa9a47dbd4163bd076611f3730.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/App.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/components/Index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.meteor/packages" beforeDir="false" afterPath="$PROJECT_DIR$/.meteor/packages" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.meteor/versions" beforeDir="false" afterPath="$PROJECT_DIR$/.meteor/versions" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,18 +57,22 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1SFJQxp7tS0lp4WTGzj6RQgDn00" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="HbShouldOpenHtmlAsHb" value="enabled" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.meteor.library.cached" value="$PROJECT_DIR$/.meteor" />
     <property name="js.meteor.library.was.enabled" value="true" />
     <property name="js.meteor.project" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/client/components" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client/components" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -49,7 +98,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1571153397357</updated>
-      <workItem from="1571153399455" duration="3471000" />
+      <workItem from="1571153399455" duration="16330000" />
     </task>
     <servers />
   </component>
@@ -66,5 +115,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

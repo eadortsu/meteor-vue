@@ -1,22 +1,29 @@
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+//// client/main.js
+import Vue from 'vue';
+import VueMeteorTracker from 'vue-meteor-tracker';
+Vue.use(VueMeteorTracker);
 
+import Vuetify from 'vuetify';
+import 'vuetify/dist/vuetify.min.css';
+import '@mdi/font/css/materialdesignicons.css'
+Vue.use(Vuetify); // this is all you need for Vuetify 1.x
+
+import App from './App.vue';
 import './main.html';
+import router from './router.js';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
-});
-
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
+// for Vuetify 2.x you also need:
+const vuetify = new Vuetify({
+  icons: {
+    iconfont: 'mdi', // default - only for display purposes
   },
 });
 
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
+Meteor.startup(() => {
+  new Vue({
+    el: '#app',
+    router,
+    vuetify, // this bit is also needed for Vuetify 2.x
+    ...App,
+  });
 });
