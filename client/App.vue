@@ -6,7 +6,7 @@
                 app
         >
             <v-list dense>
-                <template v-for="item in items">
+                <template v-for="item in menus">
                     <v-row
                             v-if="item.heading"
                             :key="item.heading"
@@ -117,27 +117,28 @@
                             src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
                             alt="Vuetify"
                     >
-                    </v-img></v-avatar>
+                    </v-img>
+                </v-avatar>
             </v-btn>
         </v-app-bar>
         <v-content>
             <v-card>
-               <!-- <v-card-title>
-                    EIT 2020
-                    <v-spacer></v-spacer>
-                    <v-text-field
-                            v-model="search"
-                            append-icon="mdi-magnify"
-                            label="Search"
-                            single-line
-                            hide-details
-                    ></v-text-field>
-                </v-card-title>-->
+                <!-- <v-card-title>
+                     EIT 2020
+                     <v-spacer></v-spacer>
+                     <v-text-field
+                             v-model="search"
+                             append-icon="mdi-magnify"
+                             label="Search"
+                             single-line
+                             hide-details
+                     ></v-text-field>
+                 </v-card-title>-->
 
                 <v-data-table
                         v-model="selected"
                         :headers="headers"
-                        :items="desserts"
+                        :items="eits"
                         :search="search"
                         item-key="name"
                         show-select
@@ -165,26 +166,32 @@
                                         <v-container>
                                             <v-row>
                                                 <v-col cols="6" sm="6" md="6">
-                                                    <v-text-field v-model="editedItem.name" label="First Name"></v-text-field>
+                                                    <v-text-field v-model="editedItem.first_name"
+                                                                  label="First Name"></v-text-field>
                                                 </v-col>
                                                 <v-col cols="6" sm="6" md="6">
-                                                    <v-text-field v-model="editedItem.name" label="Last Name"></v-text-field>
+                                                    <v-text-field v-model="editedItem.last_name"
+                                                                  label="Last Name"></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" sm="12" md="12">
-                                                    <v-text-field v-model="editedItem.country" label="Country"></v-text-field>
+                                                    <v-text-field v-model="editedItem.country"
+                                                                  label="Country"></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" sm="12" md="12">
-                                                    <v-text-field v-model="editedItem.email" label="Email"></v-text-field>
+                                                    <v-text-field v-model="editedItem.email"
+                                                                  label="Email"></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" sm="12" md="12">
 
-                                                    <v-text-field v-model="editedItem.contact" label="Contact"></v-text-field>
+                                                    <v-text-field v-model="editedItem.contact"
+                                                                  label="Contact"></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" sm="12" md="12">
                                                     <v-text-field v-model="editedItem.age" label="Age"></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" sm="12" md="12">
-                                                    <v-select :items="genders" v-model="editedItem.gender" label="Gender"></v-select>
+                                                    <v-select :items="genders" v-model="editedItem.gender"
+                                                              label="Gender"></v-select>
 
                                                 </v-col>
                                             </v-row>
@@ -199,6 +206,9 @@
                                 </v-card>
                             </v-dialog>
                         </v-toolbar>
+                    </template>
+                    <template v-slot:item.name="{ item }">
+                        <h4> {{item.first_name}} {{item.last_name}}</h4>
                     </template>
                     <template v-slot:item.action="{ item }">
                         <v-icon
@@ -215,8 +225,9 @@
                             mdi-delete
                         </v-icon>
                     </template>
+
                     <template v-slot:no-data>
-                        <v-btn color="primary" @click="initialize">Reset</v-btn>
+                        <v-btn color="primary" @click="initialize">Refresh</v-btn>
                     </template>
                 </v-data-table>
 
@@ -239,24 +250,26 @@
 </template>
 
 <script>
+    import {Eits} from "../import/api/eits.js";
+
     export default {
         props: {
             source: String,
         },
         data: () => ({
-            genders: ['Male','Female'],
+            genders: ['Male', 'Female'],
             dialog: false,
             drawer: null,
-            items: [
-                { icon: 'mdi-view-dashboard', text: 'Dashboard' },
+            menus: [
+                {icon: 'mdi-view-dashboard', text: 'Dashboard'},
                 {
                     icon: 'mdi-chevron-up',
                     'icon-alt': 'mdi-chevron-down',
                     text: "EIT's",
                     model: false,
                     children: [
-                        { icon:"mdi-account-multiple", text: 'Show All' },
-                        { icon:"mdi-account-multiple-plus", text: 'Add New' },
+                        {icon: "mdi-account-multiple", text: 'Show All'},
+                        {icon: "mdi-account-multiple-plus", text: 'Add New'},
 
 
                     ],
@@ -273,85 +286,87 @@
                     sortable: true,
                     value: 'name',
                 },
-                { text: 'Country', value: 'country' },
-                { text: 'Email', value: 'email' },
-                { text: 'Contact', value: 'contact' },
-                { text: 'Age', value: 'age' },
-                { text: 'Gender', value: 'gender' },
-                { text: 'Actions', value: 'action', sortable: false },
+                {text: 'Country', value: 'country'},
+                {text: 'Email', value: 'email'},
+                {text: 'Contact', value: 'contact'},
+                {text: 'Age', value: 'age'},
+                {text: 'Gender', value: 'gender'},
+                {text: 'Actions', value: 'action', sortable: false},
             ],
-            desserts: [],
+            eits: [],
             editedIndex: -1,
+            editedId: null,
             editedItem: {
-                name: '',
-                calories: 0,
-                fat: 0,
-                carbs: 0,
-                protein: 0,
+                first_name: '',
+                last_name: '',
+                country: '',
+                email: '',
+                contact: '',
+                age: '',
+                gender: '',
             },
             defaultItem: {
-                name: '',
-                calories: 0,
-                fat: 0,
-                carbs: 0,
-                protein: 0,
+                first_name: '',
+                last_name: '',
+                country: '',
+                email: '',
+                contact: '',
+                age: '',
+                gender: '',
             },
         }),
 
         computed: {
-            formTitle () {
+            formTitle() {
                 return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
             },
         },
 
         watch: {
-            dialog (val) {
+            dialog(val) {
                 val || this.close()
             },
         },
 
-        created () {
+        mounted() {
             this.initialize()
         },
-
+        created() {
+            this.initialize()
+        },
         methods: {
-            initialize () {
-                this.desserts = [
-                    {
-                        name: 'Eugene Ador',
-                        country: 'Ghana',
-                        email: 'eugene.adortsu@meltwater.org',
-                        contact: '+233505652156',
-                        age: 65,
-                        gender: 'Male',
-                    },
-                ]
+            initialize() {
+                this.eits = Eits.find({}).fetch()
             },
 
-            editItem (item) {
-                this.editedIndex = this.desserts.indexOf(item)
+            editItem(item) {
+                this.editedIndex = this.eits.indexOf(item)
+                this.editedId = item._id
                 this.editedItem = Object.assign({}, item)
                 this.dialog = true
             },
 
-            deleteItem (item) {
-                const index = this.desserts.indexOf(item)
-                confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
+            deleteItem(item) {
+                const index = this.eits.indexOf(item)
+                confirm('Are you sure you want to delete this item?') && this.eits.splice(index, 1) && Eits.remove(item._id)
             },
 
-            close () {
+            close() {
                 this.dialog = false
                 setTimeout(() => {
                     this.editedItem = Object.assign({}, this.defaultItem)
                     this.editedIndex = -1
+                    this.editedId = null
                 }, 300)
             },
 
-            save () {
-                if (this.editedIndex > -1) {
-                    Object.assign(this.desserts[this.editedIndex], this.editedItem)
+            save(item) {
+                if (this.editedIndex > -1 && this.editedId !== null) {
+                    Object.assign(this.eits[this.editedIndex], this.editedItem)
+                    Eits.update(this.editedId, this.editedItem);
                 } else {
-                    this.desserts.push(this.editedItem)
+                    this.eits.push(this.editedItem)
+                    Eits.insert(this.editedItem);
                 }
                 this.close()
             },
