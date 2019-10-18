@@ -146,7 +146,7 @@
                 >
                     <template v-slot:top>
                         <v-toolbar flat color="white">
-                            <v-toolbar-title>EIT's</v-toolbar-title>
+                            <v-toolbar-title>EIT's ({{count}})</v-toolbar-title>
                             <v-divider
                                     class="mx-4"
                                     inset
@@ -250,9 +250,11 @@
 </template>
 
 <script>
+    import { Meteor } from 'meteor/meteor';
     import {Eits} from "../import/api/eits.js";
 
     export default {
+
         props: {
             source: String,
         },
@@ -293,7 +295,6 @@
                 {text: 'Gender', value: 'gender'},
                 {text: 'Actions', value: 'action', sortable: false},
             ],
-            eits: [],
             editedIndex: -1,
             editedId: null,
             editedItem: {
@@ -320,6 +321,9 @@
             formTitle() {
                 return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
             },
+            count () {
+                return this.eits.length
+            }
         },
 
         watch: {
@@ -327,12 +331,21 @@
                 val || this.close()
             },
         },
+        meteor: {
 
-        mounted() {
-            this.initialize()
+// Subscriptions and Collections queries here
+            $subscribe: {
+                'eits': [],
+
+            },
+            eits () {
+                return Eits.find({}, {
+                    sort: {date: -1}
+                })
+            },
         },
-        created() {
-            this.initialize()
+        mounted(){
+
         },
         methods: {
             initialize() {
@@ -350,7 +363,10 @@
                 const index = this.eits.indexOf(item)
                 confirm('Are you sure you want to delete this item?') && this.eits.splice(index, 1) && Eits.remove(item._id)
             },
-
+            bulkDeleteItem() {
+                const index = this.eits.indexOf(item)
+                confirm('Are you sure you want to delete this item?') && this.eits.splice(index, 1) && Eits.remove(item._id)
+            },
             close() {
                 this.dialog = false
                 setTimeout(() => {

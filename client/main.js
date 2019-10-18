@@ -3,6 +3,7 @@ import Vue from 'vue';
 import VueMeteorTracker from 'vue-meteor-tracker';
 Vue.use(VueMeteorTracker);
 
+
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
 import '@mdi/font/css/materialdesignicons.css'
