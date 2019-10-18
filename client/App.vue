@@ -140,22 +140,25 @@
                         :headers="headers"
                         :items="eits"
                         :search="search"
-                        item-key="name"
+                        item-key="_id._str"
+
                         show-select
 
                 >
                     <template v-slot:top>
                         <v-toolbar flat color="white">
-                            <v-toolbar-title>EIT's ({{count}})</v-toolbar-title>
+                            <v-toolbar-title >EIT's ({{count}})</v-toolbar-title>
                             <v-divider
                                     class="mx-4"
                                     inset
                                     vertical
                             ></v-divider>
+                            <v-btn color="red" v-if="selected.length"  dark class="mb-2" >Delete Selected ({{selected.length}})</v-btn>
                             <v-spacer></v-spacer>
                             <v-dialog v-model="dialog" max-width="500px">
                                 <template v-slot:activator="{ on }">
-                                    <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+                                    <v-btn color="primary" dark class="mb-2" v-on="on">New Eit</v-btn>
+
                                 </template>
                                 <v-card>
                                     <v-card-title>
@@ -208,7 +211,7 @@
                         </v-toolbar>
                     </template>
                     <template v-slot:item.name="{ item }">
-                        <h4> {{item.first_name}} {{item.last_name}}</h4>
+                        {{item.first_name +' '+item.last_name}}
                     </template>
                     <template v-slot:item.action="{ item }">
                         <v-icon
@@ -250,8 +253,8 @@
 </template>
 
 <script>
-    import { Meteor } from 'meteor/meteor';
-    import {Eits} from "../import/api/eits.js";
+    import { Meteor } from 'meteor/meteor'
+    import {Eits} from "../import/api/eits.js"
 
     export default {
 
@@ -281,7 +284,9 @@
             ],
             search: '',
             selected: [],
+            isSelected: false,
             headers: [
+
                 {
                     text: 'Full Name',
                     align: 'left',
@@ -323,7 +328,8 @@
             },
             count () {
                 return this.eits.length
-            }
+            },
+
         },
 
         watch: {
@@ -379,13 +385,15 @@
             save(item) {
                 if (this.editedIndex > -1 && this.editedId !== null) {
                     Object.assign(this.eits[this.editedIndex], this.editedItem)
-                    Eits.update(this.editedId, this.editedItem);
+                    Eits.update(this.editedId, this.editedItem)
                 } else {
                     this.eits.push(this.editedItem)
-                    Eits.insert(this.editedItem);
+                    Eits.insert(this.editedItem)
                 }
                 this.close()
             },
+
+
         },
     }
 </script>
