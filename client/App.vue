@@ -99,22 +99,17 @@
                     class="hidden-sm-and-down"
             ></v-text-field>
             <v-spacer></v-spacer>
-            <v-btn icon>
-                <v-icon>mdi-apps</v-icon>
-            </v-btn>
-            <v-btn icon>
-                <v-icon>mdi-bell</v-icon>
-            </v-btn>
+
             <v-btn
                     icon
                     large
             >
                 <v-avatar
-                        size="32px"
+                        size="52px"
                         item
                 >
                     <v-img
-                            src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
+                            src="/logo.png"
                             alt="Vuetify"
                     >
                     </v-img>
@@ -153,7 +148,7 @@
                                     inset
                                     vertical
                             ></v-divider>
-                            <v-btn color="red" v-if="selected.length"  dark class="mb-2" >Delete Selected ({{selected.length}})</v-btn>
+                            <v-btn color="red" v-if="selected.length"  @click="bulkDeleteItem" dark class="mb-2" >Delete Selected ({{selected.length}})</v-btn>
                             <v-spacer></v-spacer>
                             <v-dialog v-model="dialog" max-width="500px">
                                 <template v-slot:activator="{ on }">
@@ -264,7 +259,7 @@
         data: () => ({
             genders: ['Male', 'Female'],
             dialog: false,
-            drawer: null,
+            drawer: false,
             menus: [
                 {icon: 'mdi-view-dashboard', text: 'Dashboard'},
                 {
@@ -284,7 +279,6 @@
             ],
             search: '',
             selected: [],
-            isSelected: false,
             headers: [
 
                 {
@@ -370,8 +364,7 @@
                 confirm('Are you sure you want to delete this item?') && this.eits.splice(index, 1) && Eits.remove(item._id)
             },
             bulkDeleteItem() {
-                const index = this.eits.indexOf(item)
-                confirm('Are you sure you want to delete this item?') && this.eits.splice(index, 1) && Eits.remove(item._id)
+                confirm('Are you sure you want to delete all '+this.selected.length+' selected items?') && this.selected.map(item => Eits.remove(item._id))
             },
             close() {
                 this.dialog = false
