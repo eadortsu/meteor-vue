@@ -135,7 +135,7 @@
                         :headers="headers"
                         :items="eits"
                         :search="search"
-                        item-key="_id._str"
+                        item-key="_id"
 
                         show-select
 
@@ -250,9 +250,7 @@
 <script>
     import { Meteor } from 'meteor/meteor'
     import {Eits} from "../import/api/eits.js"
-
     export default {
-
         props: {
             source: String,
         },
@@ -270,17 +268,12 @@
                     children: [
                         {icon: "mdi-account-multiple", text: 'Show All'},
                         {icon: "mdi-account-multiple-plus", text: 'Add New'},
-
-
                     ],
                 },
-
-
             ],
             search: '',
             selected: [],
             headers: [
-
                 {
                     text: 'Full Name',
                     align: 'left',
@@ -315,7 +308,6 @@
                 gender: '',
             },
         }),
-
         computed: {
             formTitle() {
                 return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
@@ -323,20 +315,16 @@
             count () {
                 return this.eits.length
             },
-
         },
-
         watch: {
             dialog(val) {
                 val || this.close()
             },
         },
         meteor: {
-
 // Subscriptions and Collections queries here
             $subscribe: {
                 'eits': [],
-
             },
             eits () {
                 return Eits.find({}, {
@@ -345,20 +333,17 @@
             },
         },
         mounted(){
-
         },
         methods: {
             initialize() {
                 this.eits = Eits.find({}).fetch()
             },
-
             editItem(item) {
                 this.editedIndex = this.eits.indexOf(item)
                 this.editedId = item._id
                 this.editedItem = Object.assign({}, item)
                 this.dialog = true
             },
-
             deleteItem(item) {
                 const index = this.eits.indexOf(item)
                 confirm('Are you sure you want to delete this item?') && this.eits.splice(index, 1) && Eits.remove(item._id)
@@ -374,7 +359,6 @@
                     this.editedId = null
                 }, 300)
             },
-
             save(item) {
                 if (this.editedIndex > -1 && this.editedId !== null) {
                     Object.assign(this.eits[this.editedIndex], this.editedItem)
@@ -385,8 +369,6 @@
                 }
                 this.close()
             },
-
-
         },
     }
 </script>
