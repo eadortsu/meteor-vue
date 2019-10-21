@@ -142,13 +142,15 @@
                 >
                     <template v-slot:top>
                         <v-toolbar flat color="white">
-                            <v-toolbar-title >EIT's ({{count}})</v-toolbar-title>
+                            <v-toolbar-title>EIT's ({{count}})</v-toolbar-title>
                             <v-divider
                                     class="mx-4"
                                     inset
                                     vertical
                             ></v-divider>
-                            <v-btn color="red" v-if="selected.length"  @click="bulkDeleteItem" dark class="mb-2" >Delete Selected ({{selected.length}})</v-btn>
+                            <v-btn color="red" v-if="selected.length" @click="bulkDeleteItem" dark class="mb-2">Delete
+                                Selected ({{selected.length}})
+                            </v-btn>
                             <v-spacer></v-spacer>
                             <v-dialog v-model="dialog" max-width="500px">
                                 <template v-slot:activator="{ on }">
@@ -248,8 +250,9 @@
 </template>
 
 <script>
-    import { Meteor } from 'meteor/meteor'
+    import {Meteor} from 'meteor/meteor'
     import {Eits} from "../import/api/eits.js"
+
     export default {
         props: {
             source: String,
@@ -307,12 +310,13 @@
                 age: '',
                 gender: '',
             },
+            errors: []
         }),
         computed: {
             formTitle() {
                 return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
             },
-            count () {
+            count() {
                 return this.eits.length
             },
         },
@@ -326,13 +330,13 @@
             $subscribe: {
                 'eits': [],
             },
-            eits () {
+            eits() {
                 return Eits.find({}, {
                     sort: {date: -1}
                 })
             },
         },
-        mounted(){
+        mounted() {
         },
         methods: {
             initialize() {
@@ -349,7 +353,8 @@
                 confirm('Are you sure you want to delete this item?') && this.eits.splice(index, 1) && Eits.remove(item._id)
             },
             bulkDeleteItem() {
-                confirm('Are you sure you want to delete all '+this.selected.length+' selected items?') && this.selected.map(item => Eits.remove(item._id))
+                confirm('Are you sure you want to delete all ' + this.selected.length + ' selected items?') && this.selected.map(item => Eits.remove(item._id))
+                this.selected = []
             },
             close() {
                 this.dialog = false
@@ -359,15 +364,20 @@
                     this.editedId = null
                 }, 300)
             },
-            save(item) {
-                if (this.editedIndex > -1 && this.editedId !== null) {
-                    Object.assign(this.eits[this.editedIndex], this.editedItem)
-                    Eits.update(this.editedId, this.editedItem)
-                } else {
-                    this.eits.push(this.editedItem)
-                    Eits.insert(this.editedItem)
+            save() {
+                if (this.editedItem.first_name !== "" && this.editedItem.last_name !== "" && this.editedItem.country !== "" && this.editedItem.email !== "" && this.editedItem.contact !== "" && this.editedItem.age !== "" && this.editedItem.gender !== "") {
+                    if (this.editedIndex > -1 && this.editedId !== null) {
+                        Object.assign(this.eits[this.editedIndex], this.editedItem)
+                        Eits.update(this.editedId, this.editedItem)
+                    } else {
+                        this.eits.push(this.editedItem)
+                        Eits.insert(this.editedItem)
+                    }
+                    this.close()
+                }else {
+                   if(this.editedItem.first_name){ this.errors['first_name'] = "First Name is Required"}
+                   if(this.editedItem.last_name){ this.errors['last_name'] = "Last Name is Required"}
                 }
-                this.close()
             },
         },
     }
