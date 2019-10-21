@@ -160,6 +160,7 @@
                                 <v-card>
                                     <v-card-title>
                                         <span class="headline">{{ formTitle }}</span>
+
                                     </v-card-title>
 
                                     <v-card-text>
@@ -168,30 +169,37 @@
                                                 <v-col cols="6" sm="6" md="6">
                                                     <v-text-field v-model="editedItem.first_name"
                                                                   label="First Name"></v-text-field>
+                                                    <small class="err" v-if="errors.first_name" >{{errors.first_name}}</small>
                                                 </v-col>
                                                 <v-col cols="6" sm="6" md="6">
                                                     <v-text-field v-model="editedItem.last_name"
                                                                   label="Last Name"></v-text-field>
+                                                    <small class="err" v-if="errors.last_name" >{{errors.last_name}}</small>
                                                 </v-col>
                                                 <v-col cols="12" sm="12" md="12">
                                                     <v-text-field v-model="editedItem.country"
                                                                   label="Country"></v-text-field>
+                                                    <small class="err" v-if="errors.country" >{{errors.country}}</small>
                                                 </v-col>
                                                 <v-col cols="12" sm="12" md="12">
                                                     <v-text-field v-model="editedItem.email"
                                                                   label="Email"></v-text-field>
+                                                    <small class="err" v-if="errors.email" >{{errors.email}}</small>
                                                 </v-col>
                                                 <v-col cols="12" sm="12" md="12">
 
                                                     <v-text-field v-model="editedItem.contact"
                                                                   label="Contact"></v-text-field>
+                                                    <small class="err" v-if="errors.age" >{{errors.age}}</small>
                                                 </v-col>
                                                 <v-col cols="12" sm="12" md="12">
                                                     <v-text-field v-model="editedItem.age" label="Age"></v-text-field>
+                                                    <small class="err" v-if="errors.age" >{{errors.age}}</small>
                                                 </v-col>
                                                 <v-col cols="12" sm="12" md="12">
                                                     <v-select :items="genders" v-model="editedItem.gender"
                                                               label="Gender"></v-select>
+                                                    <small class="err" v-if="errors.gender" >{{errors.gender}}</small>
 
                                                 </v-col>
                                             </v-row>
@@ -310,7 +318,7 @@
                 age: '',
                 gender: '',
             },
-            errors: []
+            errors: {}
         }),
         computed: {
             formTitle() {
@@ -365,6 +373,7 @@
                 }, 300)
             },
             save() {
+                this.errors = {}
                 if (this.editedItem.first_name !== "" && this.editedItem.last_name !== "" && this.editedItem.country !== "" && this.editedItem.email !== "" && this.editedItem.contact !== "" && this.editedItem.age !== "" && this.editedItem.gender !== "") {
                     if (this.editedIndex > -1 && this.editedId !== null) {
                         Object.assign(this.eits[this.editedIndex], this.editedItem)
@@ -375,10 +384,20 @@
                     }
                     this.close()
                 }else {
-                   if(this.editedItem.first_name){ this.errors['first_name'] = "First Name is Required"}
-                   if(this.editedItem.last_name){ this.errors['last_name'] = "Last Name is Required"}
+                   if(this.editedItem.first_name === ""){ this.errors["first_name"] = "First Name is Required"}
+                   if(this.editedItem.last_name === ""){ this.errors["last_name"] = "Last Name is Required"}
+                   if(this.editedItem.country === ""){ this.errors["country"] = "Country is Required"}
+                   if(this.editedItem.age === ""){ this.errors["age"] = "Country is Required"}
+                   if(this.editedItem.contact === ""){ this.errors["contact"] = "Contact is Required"}
+                   if(this.editedItem.gender === ""){ this.errors["gender"] = "Gender is Required"}
+                   if(this.editedItem.email === ""){ this.errors["email"] = "Email is Required"}
                 }
             },
         },
     }
 </script>
+<style>
+    .err{
+        color: red;
+    }
+</style>
