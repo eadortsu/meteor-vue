@@ -26,6 +26,5 @@ vuejs:blaze-integration
 accounts-facebook
 accounts-google
 accounts-github
-accounts-twitter
 useraccounts:bootstrap
 service-configuration
