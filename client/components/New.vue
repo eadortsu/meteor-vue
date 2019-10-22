@@ -93,7 +93,10 @@
 // Subscriptions and Collections queries here
 
         },
-        mounted() {
+        beforeMount(){
+            if(!Meteor.user()){
+                this.$router.push('/auth')
+            }
         },
         methods: {
 
@@ -101,6 +104,7 @@
                 this.errors = {}
                 if (this.insetItem.first_name !== "" && this.insetItem.last_name !== "" && this.insetItem.country !== "" && this.insetItem.email !== "" && this.insetItem.contact !== "" && this.insetItem.age !== "" && this.insetItem.gender !== "") {
                        // Eits.insert(this.insetItem)
+                    this.insetItem.ownerId = Meteor.userId()
                     Meteor.call('eits.insert',this.insetItem)
                     this.$router.push('/show')
                 } else {

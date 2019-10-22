@@ -1,6 +1,6 @@
 <template>
     <v-app id="inspire">
-        <v-navigation-drawer
+        <v-navigation-drawer v-if="$route.path !== '/auth'"
                 v-model="drawer"
                 :clipped="$vuetify.breakpoint.lgAndUp"
                 app
@@ -74,9 +74,10 @@
                     </v-list-item>
                 </template>
             </v-list>
+
         </v-navigation-drawer>
 
-        <v-app-bar
+        <v-app-bar v-if="$route.path !== '/auth'"
                 :clipped-left="$vuetify.breakpoint.lgAndUp"
                 app
                 color="blue darken-3"
@@ -88,6 +89,7 @@
             >
                 <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
                 <span class="hidden-sm-and-down">Mest APP</span>
+
             </v-toolbar-title>
             <v-text-field
                     v-if="$route.path === '/show'"
@@ -100,7 +102,7 @@
                     class="hidden-sm-and-down"
             ></v-text-field>
             <v-spacer></v-spacer>
-
+            <span > <blaze-template template="loginButtons" ></blaze-template></span>
             <v-btn
                     icon
                     large
@@ -121,6 +123,7 @@
 
             <router-view></router-view>
         </v-content>
+
         <v-btn v-if="$route.path === '/new'"
                 bottom
                 color="pink"
@@ -169,8 +172,9 @@
                     'icon-alt': 'mdi-chevron-down',
                     text: "EIT's",
                     model: false,
+                    auth: true,
                     children: [
-                        {icon: "mdi-account-multiple", text: 'Show All' , path:'/show'},
+                        {icon: "mdi-account-multiple", text: 'Show My Eits' , path:'/show'},
                         {icon: "mdi-account-multiple-plus", text: 'Add New', path: '/new'},
                     ],
                 },
@@ -292,5 +296,14 @@
 <style>
     .err{
         color: red;
+    }
+
+    #login-dropdown-list{
+        margin-left: -100px;
+    }
+    #login-sign-in-link, #login-name-link{
+        color: white !important;;
+        margin: 20px !important;;
+        text-decoration: none !important;
     }
 </style>

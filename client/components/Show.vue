@@ -25,7 +25,7 @@
                 >
                     <template v-slot:top>
                         <v-toolbar flat color="white">
-                            <v-toolbar-title>EIT's ({{count}})</v-toolbar-title>
+                            <v-toolbar-title>My EIT's ({{count}})</v-toolbar-title>
                             <v-divider
                                     class="mx-4"
                                     inset
@@ -42,14 +42,14 @@
                         {{item.first_name +' '+item.last_name}}
                     </template>
                     <template v-slot:item.action="{ item }">
-                        <v-icon
+                        <v-icon v-if="item.ownerId === loggedinId"
                                 small
                                 class="mr-2"
                                 @click="$router.push({ name: 'edit', params: { eitId: item._id }})"
                         >
                             mdi-pencil
                         </v-icon>
-                        <v-icon
+                        <v-icon v-if="item.ownerId === loggedinId"
                                 small
                                 @click="deleteItem(item)"
                         >
@@ -98,6 +98,9 @@
             count() {
                 return this.eits.length
             },
+            loggedinId(){
+                return Meteor.userId()
+            }
         },
         meteor: {
 // Subscriptions and Collections queries here
@@ -105,12 +108,16 @@
                 'eits': [],
             },
             eits() {
-                return Eits.find({}, {
+                return Eits.find({"ownerId": Meteor.userId()}, {
                     sort: {date: -1}
                 })
             },
         },
-        mounted() {
+        beforeMount(){
+          if(Meteor.user() === null){
+              this.$router.push('/auth')
+              //console.log(Meteor.user())
+          }
         },
         methods: {
             initialize() {

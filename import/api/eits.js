@@ -14,23 +14,28 @@ Meteor.methods({
         //check(text, String);
 
         // Make sure the user is logged in before inserting a task
-       /* if (! this.userId) {
+        if (! this.userId) {
             throw new Meteor.Error('not-authorized');
-        }*/
+        }
 
         Eits.insert(eit);
     },
     'eits.remove'(eitId) {
         check(eitId, String);
-        /*const eit = Eits.findOne(eitId);
-        if (eit.private && eit.owner !== this.userId) {
+        const eit = Eits.findOne(eitId);
+        if (eit.ownerId !== this.userId) {
             // If the eit is private, make sure only the owner can delete it
             throw new Meteor.Error('not-authorized');
-        }*/
+        }
         Eits.remove(eitId);
     },
     'eits.update'(eitId, editedEit) {
         check(eitId, String);
+        const eit = Eits.findOne(eitId);
+        if (eit.ownerId !== this.userId) {
+            // If the eit is private, make sure only the owner can delete it
+            throw new Meteor.Error('not-authorized');
+        }
        /* const eit = Eits.findOne(eitId);*/
        /* if (eit.private && eit.owner !== this.userId) {
             // If the eit is private, make sure only the owner can check it off

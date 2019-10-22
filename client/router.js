@@ -6,6 +6,7 @@ import Show from './components/Show.vue'
 import Dashboard from './components/Dashboard.vue'
 import New from './components/New.vue'
 import Edit from './components/Edit.vue'
+import Login from './components/auth/Login.vue'
 
 Vue.use(VueRouter);
 
@@ -35,6 +36,11 @@ const routes = [
         path: '/edit/:eitId',
         name: 'edit',
         component: Edit
+    },
+    {
+        path: '/auth',
+        name: 'login',
+        component: Login
     },
 
 ];
