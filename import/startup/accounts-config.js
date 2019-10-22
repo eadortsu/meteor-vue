@@ -51,8 +51,8 @@ AccountsTemplates.configure({
     showResendVerificationEmailLink: false,
 
     // Client-side Validation
-    continuousValidation: false,
-    negativeFeedback: false,
+    continuousValidation: true,
+    negativeFeedback: true,
     negativeValidation: true,
     positiveValidation: true,
     positiveFeedback: true,
@@ -61,10 +61,6 @@ AccountsTemplates.configure({
     // Privacy Policy and Terms of Use
     privacyUrl: 'privacy',
     termsUrl: 'terms-of-use',
-
-    // Redirects
-    homeRoutePath: '/home',
-    redirectTimeout: 4000,
 
     // Hooks
     onSubmitHook: mySubmitFunc,
