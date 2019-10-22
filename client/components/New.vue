@@ -69,7 +69,7 @@
 
 <script>
     import {Meteor} from 'meteor/meteor'
-    import {Eits} from "../../import/api/eits.js"
+    import  "../../import/api/eits.js"
 
     export default {
         props: {
@@ -100,7 +100,8 @@
             save() {
                 this.errors = {}
                 if (this.insetItem.first_name !== "" && this.insetItem.last_name !== "" && this.insetItem.country !== "" && this.insetItem.email !== "" && this.insetItem.contact !== "" && this.insetItem.age !== "" && this.insetItem.gender !== "") {
-                        Eits.insert(this.insetItem)
+                       // Eits.insert(this.insetItem)
+                    Meteor.call('eits.insert',this.insetItem)
                     this.$router.push('/show')
                 } else {
                     if (this.insetItem.first_name === "") {

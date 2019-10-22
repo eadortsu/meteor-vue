@@ -75,8 +75,6 @@
             source: String,
         },
         data: () => ({
-            genders: ['Male', 'Female'],
-            dialog: false,
             drawer: false,
             search: '',
             selected: [],
@@ -94,37 +92,11 @@
                 {text: 'Gender', value: 'gender'},
                 {text: 'Actions', value: 'action', sortable: false},
             ],
-            editedIndex: -1,
-            editedId: null,
-            editedItem: {
-                first_name: '',
-                last_name: '',
-                country: '',
-                email: '',
-                contact: '',
-                age: '',
-                gender: '',
-            },
-            defaultItem: {
-                first_name: '',
-                last_name: '',
-                country: '',
-                email: '',
-                contact: '',
-                age: '',
-                gender: '',
-            },
-            errors: {}
         }),
         computed: {
 
             count() {
                 return this.eits.length
-            },
-        },
-        watch: {
-            dialog(val) {
-                val || this.close()
             },
         },
         meteor: {
@@ -144,49 +116,15 @@
             initialize() {
                 this.eits = Eits.find({}).fetch()
             },
-            editItem(item) {
-                this.editedIndex = this.eits.indexOf(item)
-                this.editedId = item._id
-                this.editedItem = Object.assign({}, item)
-                this.dialog = true
-            },
             deleteItem(item) {
                 const index = this.eits.indexOf(item)
-                confirm('Are you sure you want to delete this item?') && this.eits.splice(index, 1) && Eits.remove(item._id)
+                confirm('Are you sure you want to delete this item?') && this.eits.splice(index, 1) && Meteor.call('eits.remove',item._id)
             },
             bulkDeleteItem() {
-                confirm('Are you sure you want to delete all ' + this.selected.length + ' selected items?') && this.selected.map(item => Eits.remove(item._id))
+                confirm('Are you sure you want to delete all ' + this.selected.length + ' selected items?') && this.selected.map(item => Meteor.call('eits.remove',item._id))
                 this.selected = []
             },
-            close() {
-                this.dialog = false
-                setTimeout(() => {
-                    this.editedItem = Object.assign({}, this.defaultItem)
-                    this.editedIndex = -1
-                    this.editedId = null
-                }, 300)
-            },
-            save() {
-                this.errors = {}
-                if (this.editedItem.first_name !== "" && this.editedItem.last_name !== "" && this.editedItem.country !== "" && this.editedItem.email !== "" && this.editedItem.contact !== "" && this.editedItem.age !== "" && this.editedItem.gender !== "") {
-                    if (this.editedIndex > -1 && this.editedId !== null) {
-                        Object.assign(this.eits[this.editedIndex], this.editedItem)
-                        Eits.update(this.editedId, this.editedItem)
-                    } else {
-                        this.eits.push(this.editedItem)
-                        Eits.insert(this.editedItem)
-                    }
-                    this.close()
-                }else {
-                    if(this.editedItem.first_name === ""){ this.errors["first_name"] = "First Name is Required"}
-                    if(this.editedItem.last_name === ""){ this.errors["last_name"] = "Last Name is Required"}
-                    if(this.editedItem.country === ""){ this.errors["country"] = "Country is Required"}
-                    if(this.editedItem.age === ""){ this.errors["age"] = "Country is Required"}
-                    if(this.editedItem.contact === ""){ this.errors["contact"] = "Contact is Required"}
-                    if(this.editedItem.gender === ""){ this.errors["gender"] = "Gender is Required"}
-                    if(this.editedItem.email === ""){ this.errors["email"] = "Email is Required"}
-                }
-            },
+
         },
     }
 </script>

@@ -99,7 +99,8 @@
             save() {
                 this.errors = {}
                 if (this.editItem.first_name !== "" && this.editItem.last_name !== "" && this.editItem.country !== "" && this.editItem.email !== "" && this.editItem.contact !== "" && this.editItem.age !== "" && this.editItem.gender !== "") {
-                    Eits.update(this.editedId, this.editItem)
+                    //Eits.update(this.editedId, this.editItem)
+                    Meteor.call('eits.update',this.editedId,this.editItem)
                     this.$router.push('/show')
                 } else {
                     if (this.editItem.first_name === "") {
