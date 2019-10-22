@@ -46,7 +46,7 @@
                         <v-list-item
                                 v-for="(child, i) in item.children"
                                 :key="i"
-                                @click=""
+                                @click="$router.push(child.path)"
                         >
                             <v-list-item-action v-if="child.icon">
                                 <v-icon>{{ child.icon }}</v-icon>
@@ -61,7 +61,7 @@
                     <v-list-item
                             v-else
                             :key="item.text"
-                            @click=""
+                            @click="$router.push(item.path)"
                     >
                         <v-list-item-action>
                             <v-icon>{{ item.icon }}</v-icon>
@@ -90,6 +90,7 @@
                 <span class="hidden-sm-and-down">Mest APP</span>
             </v-toolbar-title>
             <v-text-field
+                    v-if="$route.path === '/show'"
                     flat
                     solo-inverted
                     hide-details
@@ -117,142 +118,34 @@
             </v-btn>
         </v-app-bar>
         <v-content>
-            <v-card>
-                <!-- <v-card-title>
-                     EIT 2020
-                     <v-spacer></v-spacer>
-                     <v-text-field
-                             v-model="search"
-                             append-icon="mdi-magnify"
-                             label="Search"
-                             single-line
-                             hide-details
-                     ></v-text-field>
-                 </v-card-title>-->
 
-                <v-data-table
-                        v-model="selected"
-                        :headers="headers"
-                        :items="eits"
-                        :search="search"
-                        item-key="_id"
-
-                        show-select
-
-                >
-                    <template v-slot:top>
-                        <v-toolbar flat color="white">
-                            <v-toolbar-title>EIT's ({{count}})</v-toolbar-title>
-                            <v-divider
-                                    class="mx-4"
-                                    inset
-                                    vertical
-                            ></v-divider>
-                            <v-btn color="red" v-if="selected.length" @click="bulkDeleteItem" dark class="mb-2">Delete
-                                Selected ({{selected.length}})
-                            </v-btn>
-                            <v-spacer></v-spacer>
-                            <v-dialog v-model="dialog" max-width="500px">
-                                <template v-slot:activator="{ on }">
-                                    <v-btn color="primary" dark class="mb-2" v-on="on">New Eit</v-btn>
-
-                                </template>
-                                <v-card>
-                                    <v-card-title>
-                                        <span class="headline">{{ formTitle }}</span>
-
-                                    </v-card-title>
-
-                                    <v-card-text>
-                                        <v-container>
-                                            <v-row>
-                                                <v-col cols="6" sm="6" md="6">
-                                                    <v-text-field v-model="editedItem.first_name"
-                                                                  label="First Name"></v-text-field>
-                                                    <small class="err" v-if="errors.first_name" >{{errors.first_name}}</small>
-                                                </v-col>
-                                                <v-col cols="6" sm="6" md="6">
-                                                    <v-text-field v-model="editedItem.last_name"
-                                                                  label="Last Name"></v-text-field>
-                                                    <small class="err" v-if="errors.last_name" >{{errors.last_name}}</small>
-                                                </v-col>
-                                                <v-col cols="12" sm="12" md="12">
-                                                    <v-text-field v-model="editedItem.country"
-                                                                  label="Country"></v-text-field>
-                                                    <small class="err" v-if="errors.country" >{{errors.country}}</small>
-                                                </v-col>
-                                                <v-col cols="12" sm="12" md="12">
-                                                    <v-text-field v-model="editedItem.email"
-                                                                  label="Email"></v-text-field>
-                                                    <small class="err" v-if="errors.email" >{{errors.email}}</small>
-                                                </v-col>
-                                                <v-col cols="12" sm="12" md="12">
-
-                                                    <v-text-field v-model="editedItem.contact"
-                                                                  label="Contact"></v-text-field>
-                                                    <small class="err" v-if="errors.age" >{{errors.age}}</small>
-                                                </v-col>
-                                                <v-col cols="12" sm="12" md="12">
-                                                    <v-text-field v-model="editedItem.age" label="Age"></v-text-field>
-                                                    <small class="err" v-if="errors.age" >{{errors.age}}</small>
-                                                </v-col>
-                                                <v-col cols="12" sm="12" md="12">
-                                                    <v-select :items="genders" v-model="editedItem.gender"
-                                                              label="Gender"></v-select>
-                                                    <small class="err" v-if="errors.gender" >{{errors.gender}}</small>
-
-                                                </v-col>
-                                            </v-row>
-                                        </v-container>
-                                    </v-card-text>
-
-                                    <v-card-actions>
-                                        <v-spacer></v-spacer>
-                                        <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-                                        <v-btn color="blue darken-1" text @click="save">Save</v-btn>
-                                    </v-card-actions>
-                                </v-card>
-                            </v-dialog>
-                        </v-toolbar>
-                    </template>
-                    <template v-slot:item.name="{ item }">
-                        {{item.first_name +' '+item.last_name}}
-                    </template>
-                    <template v-slot:item.action="{ item }">
-                        <v-icon
-                                small
-                                class="mr-2"
-                                @click="editItem(item)"
-                        >
-                            mdi-pencil
-                        </v-icon>
-                        <v-icon
-                                small
-                                @click="deleteItem(item)"
-                        >
-                            mdi-delete
-                        </v-icon>
-                    </template>
-
-                    <template v-slot:no-data>
-                        <v-btn color="primary" @click="initialize">Refresh</v-btn>
-                    </template>
-                </v-data-table>
-
-            </v-card>
-
+            <router-view></router-view>
         </v-content>
-        <v-btn
+        <v-btn v-if="$route.path === '/new'"
                 bottom
                 color="pink"
                 dark
                 fab
                 fixed
                 right
-                @click="dialog = !dialog"
+                @click="$router.push('/show')"
+        >
+            <v-icon>mdi-format-float-left</v-icon>
+        </v-btn>
+
+        <v-btn v-if="$route.path === '/show'"
+               bottom
+               color="pink"
+               dark
+               fab
+               fixed
+               right
+               @click="$router.push('/new')"
         >
             <v-icon>mdi-plus</v-icon>
         </v-btn>
+
+
 
     </v-app>
 </template>
@@ -268,17 +161,17 @@
         data: () => ({
             genders: ['Male', 'Female'],
             dialog: false,
-            drawer: false,
+            drawer: true,
             menus: [
-                {icon: 'mdi-view-dashboard', text: 'Dashboard'},
+                {icon: 'mdi-view-dashboard', text: 'Dashboard', path:'/dashboard' },
                 {
                     icon: 'mdi-chevron-up',
                     'icon-alt': 'mdi-chevron-down',
                     text: "EIT's",
                     model: false,
                     children: [
-                        {icon: "mdi-account-multiple", text: 'Show All'},
-                        {icon: "mdi-account-multiple-plus", text: 'Add New'},
+                        {icon: "mdi-account-multiple", text: 'Show All' , path:'/show'},
+                        {icon: "mdi-account-multiple-plus", text: 'Add New', path: '/new'},
                     ],
                 },
             ],
@@ -321,12 +214,11 @@
             errors: {}
         }),
         computed: {
-            formTitle() {
-                return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-            },
+
             count() {
                 return this.eits.length
             },
+
         },
         watch: {
             dialog(val) {
@@ -345,6 +237,7 @@
             },
         },
         mounted() {
+
         },
         methods: {
             initialize() {

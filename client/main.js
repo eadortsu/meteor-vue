@@ -20,6 +20,8 @@ const vuetify = new Vuetify({
 })
 
 Meteor.startup(() => {
+  process.env.MONGO_URL = "mongodb://heroku_9vfmdldz:2t682ac7nffbo8q1au9r782lma@ds335648.mlab.com:35648/heroku_9vfmdldz"
+  process.env.MONGODB_URI = "mongodb://heroku_9vfmdldz:2t682ac7nffbo8q1au9r782lma@ds335648.mlab.com:35648/heroku_9vfmdldz"
   new Vue({
     el: '#app',
     router,

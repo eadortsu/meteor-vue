@@ -2,7 +2,10 @@ import Vue from 'vue'
 
 import VueRouter from 'vue-router'
 
-import Index from './components/Index.vue'
+import Show from './components/Show.vue'
+import Dashboard from './components/Dashboard.vue'
+import New from './components/New.vue'
+import Edit from './components/Edit.vue'
 
 Vue.use(VueRouter);
 
@@ -10,8 +13,28 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: '/',
-        name: 'Home',
-        component: Index
+        name: 'home',
+        component: Dashboard
+    },
+    {
+        path: '/dashboard',
+        name: 'dashboard',
+        component: Dashboard
+    },
+    {
+        path: '/show',
+        name: 'show',
+        component: Show
+    },
+    {
+        path: '/new',
+        name: 'new',
+        component: New
+    },
+    {
+        path: '/edit/:eitId',
+        name: 'edit',
+        component: Edit
     },
 
 ];
